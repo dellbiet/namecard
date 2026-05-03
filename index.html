@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Name Card - Dang Tuan Vinh</title>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+body {
+  margin: 0;
+  font-family: Arial;
+  background: linear-gradient(135deg, #d8cde0, #f3f3f3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.container {
+  width: 320px;
+}
+
+.info {
+  background: #eee;
+  border-radius: 20px;
+  padding: 15px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 15px;
+}
+
+.avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: purple;
+}
+
+.name {
+  font-weight: bold;
+}
+
+.bank {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.qr-box {
+  background: #eee;
+  border-radius: 20px;
+  padding: 15px;
+  text-align: center;
+}
+
+.qr-box img {
+  width: 100%;
+  border-radius: 10px;
+}
+
+.links {
+  margin-top: 15px;
+}
+
+.link-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #2a2a2a;
+  color: white;
+  padding: 10px;
+  border-radius: 10px;
+  margin-top: 10px;
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+.link-item:hover {
+  background: #444;
+}
+
+.link-item i {
+  width: 20px;
+  text-align: center;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <!-- Thông tin -->
+  <div class="info">
+    <img src="avatar.png" class="avatar">
+    <div>
+      <div class="name">DANG TUAN VINH</div>
+    </div>
+  </div>
+
+
+  <!-- Links -->
+  <div class="links">
+
+    <!-- 📞 Gọi điện -->
+    <a href="tel:0569440440" class="link-item">
+      <i class="fa-solid fa-phone"></i>
+      0569 440 440
+    </a>
+
+    <!-- Facebook -->
+    <a href="https://www.facebook.com/dang.vinh.927" target="_blank" class="link-item">
+      <i class="fa-brands fa-facebook"></i>
+      Facebook
+    </a>
+
+    <!-- Zalo -->
+    <a href="https://zalo.me/0904862234" target="_blank" class="link-item">
+      <i class="fa-solid fa-comment"></i>
+      Zalo
+    </a>
+
+    <!-- WeChat -->
+    <a href="https://u.wechat.com/kIe2ZIcRkIE5e9FJpAXeTII?s=4" target="_blank" class="link-item">
+      <i class="fa-brands fa-weixin"></i>
+      WeChat
+    </a>
+
+    <!-- Chuyển khoản -->
+    <a href="https://vietqr.net/transfer/TPB/93582788888?accountName=DANG%20TUAN%20VINH" target="_blank" class="link-item">
+      <i class="fa-solid fa-credit-card"></i>
+      Chuyển khoản
+    </a>
+    <!-- QR -->
+    <div class="qr-box">
+      <img src="qr.png" alt="QR chuyển khoản">
+  </div>
+  </div>
+
+</div>
+
+</body>
+</html>
