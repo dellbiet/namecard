@@ -33,10 +33,11 @@ body {
 }
 
 .avatar {
-  width: 50px;
-  height: 50px;
+  width: 55px;
+  height: 55px;
   border-radius: 50%;
-  background: purple;
+  object-fit: cover;
+  border: 3px solid #fff;
 }
 
 .name {
@@ -92,22 +93,26 @@ body {
 
 <div class="container">
 
-  <!-- Thông tin -->
+  <!-- Info -->
   <div class="info">
     <img src="avatar.png" class="avatar">
     <div>
       <div class="name">DANG TUAN VINH</div>
     </div>
   </div>
-
-
   <!-- Links -->
   <div class="links">
 
-    <!-- 📞 Gọi điện -->
+    <!-- Gọi -->
     <a href="tel:0569440440" class="link-item">
       <i class="fa-solid fa-phone"></i>
       0569 440 440
+    </a>
+
+    <!-- Gmail -->
+    <a href="mailto:dangtuanvinh@gmail.com" class="link-item">
+      <i class="fa-solid fa-envelope"></i>
+      dangtuanvinh@gmail.com
     </a>
 
     <!-- Facebook -->
@@ -117,15 +122,15 @@ body {
     </a>
 
     <!-- Zalo -->
-    <a href="https://zalo.me/0904862234" target="_blank" class="link-item">
+    <a href="https://chat.zalo.me/0904862234" target="_blank" class="link-item">
       <i class="fa-solid fa-comment"></i>
       Zalo
     </a>
 
-    <!-- WeChat -->
-    <a href="https://u.wechat.com/kIe2ZIcRkIE5e9FJpAXeTII?s=4" target="_blank" class="link-item">
-      <i class="fa-brands fa-weixin"></i>
-      WeChat
+    <!-- Địa chỉ -->
+    <a href="https://www.google.com/maps/@20.6439345,106.5304281,94m/data=!3m1!1e3?entry=ttu&g_ep=EgoyMDI2MDQyOS4wIKXMDSoASAFQAw%3D%3D" target="_blank" class="link-item">
+      <i class="fa-solid fa-location-dot"></i>
+      Địa chỉ của tôi
     </a>
 
     <!-- Chuyển khoản -->
@@ -133,10 +138,11 @@ body {
       <i class="fa-solid fa-credit-card"></i>
       Chuyển khoản
     </a>
+    
     <!-- QR -->
     <div class="qr-box">
       <img src="qr.png" alt="QR chuyển khoản">
-  </div>
+    </div>
   </div>
 
 </div>
