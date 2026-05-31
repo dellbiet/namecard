@@ -1,362 +1,488 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="vi">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ultimate Neon Name Card - Dang Tuan Vinh</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Name Card</title>
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
 
-<style>
-/* Reset cơ bản */
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
+    <style>
+      /* Reset cơ bản */
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
 
-body {
-  /* Nền tối sâu để tối đa hóa hiệu ứng neon */
-  background-color: #0d0f12; 
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  padding: 20px;
-  overflow: hidden; /* Tránh thanh cuộn khi hiệu ứng mờ quá lớn */
-}
+      body {
+        /* Dùng màu nền hơi tối lại một chút để các khối đổ bóng đen nhìn rõ mồn một */
+        background: #e2e8f0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        padding: 20px;
+      }
 
-/* Định nghĩa màu Neon chủ đạo */
-:root {
-  --neon-blue: rgba(0, 242, 254, 0.9);
-  --neon-blue-light: rgba(79, 172, 254, 0.7);
-  --neon-blur: 35px; /* Độ nhòe hào quang neon */
-}
+      /* Bảng màu chuẩn từ image_f60419.png */
+      :root {
+        --color-1: #ff9f43; /* Cam */
+        --color-2: #10ac84; /* Xanh lá */
+        --color-3: #2e86de; /* Xanh dương */
+        --color-4: #0abde3; /* Xanh cyan */
+        --color-5: #ee5253; /* Hồng/Đỏ */
+        --color-purple: #9c88ff; /* Tím */
+      }
 
-/* Khung mô phỏng điện thoại cao cấp - đã thêm đổ bóng rực rỡ */
-.phone-container {
-  width: 360px;
-  height: 740px;
-  background: #f0f3f7;
-  border-radius: 40px;
-  box-shadow: 
-    0 20px 60px rgba(0, 0, 0, 0.6),
-    /* Một chút ánh sáng neon phản chiếu lên vỏ điện thoại */
-    inset 0 0 15px rgba(0, 242, 254, 0.05);
-  padding: 30px 20px;
-  position: relative;
-  display: flex;
-  flex-direction: column;
-}
+      /* Khung mô phỏng điện thoại */
+      .phone-container {
+        width: 365px;
+        height: 780px;
+        background: #f1f5f9; /* Nền trong máy xám nhạt để tương phản với khối trắng */
+        border-radius: 40px;
+        /* Đổ bóng cực mạnh cho toàn bộ chiếc điện thoại */
+        box-shadow:
+          0 40px 80px -20px rgba(0, 0, 0, 0.25),
+          inset 0 2px 5px rgba(255, 255, 255, 1);
+        padding: 30px 22px;
+        display: flex;
+        flex-direction: column;
+      }
 
-/* --- Phần ánh sáng Neon giả lập phía sau --- */
-/* Thêm một lớp nền mờ cực lớn để tạo cảm giác ánh sáng neon chiếu lên không gian xung quanh */
-.phone-container::before {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 150%;
-  height: 150%;
-  background: radial-gradient(circle, var(--neon-blue) 0%, rgba(0,0,0,0) 70%);
-  border-radius: 50%;
-  z-index: -2;
-  filter: blur(100px);
-  opacity: 0.15;
-}
+      .profile-card {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+      }
 
-/* --- Profile Card với hiệu ứng phát sáng mạnh --- */
-.profile-card {
-  background: #f0f3f7;
-  border-radius: 30px;
-  padding: 25px 20px;
-  position: relative;
-  margin-top: 10px;
+      /* --- PHẦN 1: PROFILE VÀ QR CHUYỂN LÊN ĐẦU --- */
+      .top-info {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-bottom: 25px;
+        position: relative;
+      }
 
-  /* Hiệu ứng Neumorphism mờ mềm mại cho chính card */
-  box-shadow: 
-    -8px -8px 12px rgba(255, 255, 255, 0.8),
-    8px 8px 12px rgba(0, 0, 0, 0.04),
-    inset 0px 0px 0px 1px rgba(255, 255, 255, 0.4);
-}
+      /* Avatar bên góc trái */
+      .info-section {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        flex: 1;
+        padding-right: 15px;
+      }
 
-/* Lớp Hào Quang Neon Xanh mạnh nhất chạy sát viền Card */
-.profile-card::after {
-  content: '';
-  position: absolute;
-  top: -2px; left: -2px; right: -2px; bottom: -2px;
-  border-radius: 32px;
-  background: linear-gradient(135deg, #00f2fe 0%, #4facfe 100%);
-  z-index: -1;
-  /* Hiệu ứng đổ bóng mờ Neon nhiều lớp để tăng độ rực rỡ */
-  box-shadow: 
-    0 0 10px var(--neon-blue), 
-    0 0 20px var(--neon-blue),
-    0 0 35px var(--neon-blue-light),
-    0 0 60px var(--neon-blue-light),
-    0 0 80px rgba(79, 172, 254, 0.3);
-  filter: blur(12px); /* Nhòe biên độ vừa phải */
-}
+      .avatar-container {
+        position: relative;
+        width: 100px;
+        height: 100px;
+        background: #ffffff;
+        border-radius: 28px;
+        padding: 6px;
+        margin-bottom: 10px;
+        border: 1px solid rgba(0, 0, 0, 0.05);
+        /* Kỹ thuật đổ bóng đa lớp tích tụ: Bóng càng gần càng đậm, bóng ra xa mờ dần */
+        box-shadow:
+          0 4px 6px -1px rgba(156, 136, 255, 0.2),
+          0 12px 24px -4px rgba(156, 136, 255, 0.35),
+          0 20px 40px -10px rgba(156, 136, 255, 0.2);
+      }
 
-/* Phần Avatar & Tên - làm cho nổi bật hơn */
-.info-section {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-bottom: 25px;
-}
+      .avatar-inner {
+        width: 100%;
+        height: 100%;
+        border-radius: 22px;
+        overflow: hidden;
+        border: 2px solid var(--color-purple);
+      }
 
-.avatar-wrapper {
-  width: 90px;
-  height: 90px;
-  border-radius: 50%;
-  background: #f0f3f7;
-  padding: 4px;
-  margin-bottom: 12px;
-  position: relative;
-  
-  /* Thêm hào quang neon nhỏ cho avatar */
-  box-shadow: 0 0 15px rgba(0, 242, 254, 0.4);
-}
+      .avatar {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
 
-/* Thêm vòng tròn neon nhỏ xíu chạy quanh avatar */
-.avatar-wrapper::after {
-  content: '';
-  position: absolute;
-  top: -3px; left: -3px; right: -3px; bottom: -3px;
-  border-radius: 50%;
-  border: 1px solid rgba(0, 242, 254, 0.5);
-  box-shadow: 0 0 5px rgba(0, 242, 254, 0.3);
-}
+      .name {
+        font-size: 19px;
+        font-weight: 800;
+        color: #1e293b;
+        letter-spacing: 0.5px;
+        margin-top: 5px;
+      }
 
-.avatar {
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 3px solid #fff; /* Viền trắng mềm để avatar nổi bật */
-}
+      .color-dots {
+        display: flex;
+        gap: 6px;
+        margin-top: 10px;
+      }
+      .dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+      }
 
-.name {
-  font-size: 20px;
-  font-weight: 700;
-  color: #2b3a4a;
-  letter-spacing: 0.5px;
-  /* Thêm hiệu ứng chữ neon nhẹ cho tên */
-  text-shadow: 0 0 5px rgba(0, 242, 254, 0.2);
-}
+      /* Khối QR lên cạnh avatar */
+      .qr-zone {
+        width: 125px;
+        height: 125px;
+        background: #ffffff;
+        border-radius: 20px;
+        padding: 10px;
+        border: 1px solid rgba(0, 0, 0, 0.05);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 0;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+      }
 
-/* Danh sách các liên kết - làm cho mờ mềm mại hơn */
-.links-list {
-  display: flex;
-  flex-direction: column;
-  gap: 0px; 
-  margin-bottom: 15px;
-}
+      .qr-zone img {
+        width: 100%;
+        display: block;
+        border-radius: 12px;
+      }
 
-.link-item {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 14px 12px;
-  color: #555;
-  text-decoration: none;
-  font-weight: 600;
-  font-size: 15px;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.03);
-  transition: all 0.3s ease;
-  position: relative;
-}
+      /* --- PHẦN 2: THÔNG TIN CÔNG TY MỚI --- */
+      .company-block {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        margin-bottom: 25px;
+      }
 
-.link-item:last-child {
-  border-bottom: none;
-}
+      .company-card {
+        background: #ffffff;
+        border-radius: 16px;
+        padding: 15px 18px;
+        box-shadow:
+          0 2px 2px rgba(0, 0, 0, 0.05),
+          0 6px 10px rgba(0, 0, 0, 0.08);
+      }
 
-/* Hiệu ứng Hover làm cho hàng rực sáng hơn */
-.link-item:hover {
-  background: rgba(0, 242, 254, 0.03);
-  transform: translateX(3px);
-  color: #2b3a4a;
-}
+      .company-name {
+        font-size: 14px;
+        font-weight: 700;
+        color: var(--color-purple);
+        margin-bottom: 5px;
+      }
 
-.link-item:hover i {
-  /* Làm cho icon rực sáng hơn khi hover */
-  text-shadow: 0 0 8px currentColor;
-}
+      .company-detail {
+        font-size: 12px;
+        color: #64748b;
+        line-height: 1.4;
+      }
 
-.link-content-left {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-}
+      .company-web-link {
+        color: var(--color-3);
+        text-decoration: none;
+        word-break: break-all;
+      }
+      .company-web-link:hover {
+        text-decoration: underline;
+      }
 
-/* Tối ưu hóa icon để hòa vào neon xanh */
-.link-content-left i {
-  width: 24px;
-  text-align: center;
-  font-size: 18px;
-  color: #2b3a4a; /* Mặc định tối để làm nổi bật tên */
-  transition: all 0.3s ease;
-}
+      /* --- PHẦN 3: DANH SÁCH KHỐI LIÊN KẾT NỔI 3D + BÓNG ĐỔ ĐA TẦNG ĐẬM --- */
+      .links-list {
+        display: flex;
+        flex-direction: column;
+        gap: 18px; /* Giãn rộng để bóng đổ không đè lên nhau */
+        margin-bottom: 20px;
+        /* Bật chế độ môi trường không gian 3D */
+        perspective: 1000px;
+      }
 
-/* Tùy chỉnh màu icon để tạo điểm nhấn nhẹ nhưng vẫn "tông" neon */
-.fa-phone { color: #38bdf8; }
-.fa-envelope { color: #ec4899; } /* Tông hồng nhẹ tương phản nhẹ */
-.fa-facebook { color: #1877f2; }
-.fa-comment { color: #0084ff; } 
-.fa-location-dot { color: #ef4444; }
+      .link-item-card {
+        position: relative;
+        display: block;
+        text-decoration: none;
+        background: #ffffff;
+        border-radius: 16px;
+        height: 52px;
+        transition: all 0.2s cubic-bezier(0.25, 0.8, 0.25, 1);
 
-/* Mũi tên góc phải giống hình mẫu - làm mờ hơn */
-.arrow-right {
-  width: 8px;
-  height: 8px;
-  border-right: 2px solid #ddd;
-  border-bottom: 2px solid #ddd;
-  transform: rotate(-45deg);
-  transition: all 0.3s ease;
-}
+        /* ĐỔ BÓNG KHỐI 3D ĐẬM ĐẶC (LAYERED AMBIENT OCCLUSION) */
+        box-shadow:
+          0 2px 2px rgba(0, 0, 0, 0.05),
+          /* Bóng sát chân khối */ 0 8px 12px -2px rgba(0, 0, 0, 0.1),
+          /* Bóng thân khối đổ xuống */ 0 16px 20px -6px rgba(0, 0, 0, 0.12); /* Vùng mù tối lan rộng phía dưới */
 
-.link-item:hover .arrow-right {
-  border-color: #00f2fe;
-}
+        /* Tạo viền nhựa màu bọc quanh chân khối để tạo độ dày góc nhìn */
+        border-left: 5px solid transparent;
+      }
 
-/* Khu vực QR và Nút Liên hệ - rực rỡ hơn */
-.qr-container {
-  margin-top: 10px;
-  text-align: center;
-}
+      /* Đổ màu chân khối riêng biệt từng hàng */
+      .item-1 {
+        border-left-color: var(--color-1);
+      }
+      .item-2 {
+        border-left-color: var(--color-2);
+      }
+      .item-3 {
+        border-left-color: var(--color-3);
+      }
+      .item-4 {
+        border-left-color: var(--color-4);
+      }
+      .item-5 {
+        border-left-color: var(--color-5);
+      }
 
-.qr-box {
-  background: white;
-  padding: 10px;
-  border-radius: 18px;
-  display: inline-block;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
-  max-width: 160px;
-  margin-bottom: 15px;
-  position: relative;
-}
+      .card-inner-content {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 18px;
+        background: #ffffff;
+        border-radius: 0 14px 14px 0;
+        /* Tạo vết lõm nhẹ bên trong lòng khối */
+        box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.02);
+      }
 
-/* Thêm viền neon mờ cho khối QR */
-.qr-box::after {
-  content: '';
-  position: absolute;
-  top: -2px; left: -2px; right: -2px; bottom: -2px;
-  border-radius: 20px;
-  border: 1px solid rgba(0, 242, 254, 0.2);
-  box-shadow: 0 0 10px rgba(0, 242, 254, 0.15);
-}
+      .link-left {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+      }
 
-.qr-box img {
-  width: 100%;
-  display: block;
-  border-radius: 10px;
-}
+      /* Khối vuông chứa icon dạng nút nhấn 3D thu nhỏ */
+      .icon-box-3d {
+        width: 30px;
+        height: 30px;
+        border-radius: 8px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #ffffff;
+        font-size: 12px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+      }
 
-/* Nút tương tác chính ở đáy card - rực rỡ nhất */
-.action-btn {
-  width: 100%;
-  padding: 15px;
-  background: linear-gradient(135deg, #00f2fe 0%, #4facfe 100%);
-  border: none;
-  border-radius: 25px;
-  color: white;
-  font-size: 16px;
-  font-weight: bold;
-  cursor: pointer;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  
-  /* Đổ bóng rực rỡ cho chính nút bấm */
-  box-shadow: 
-    0 10px 25px rgba(79, 172, 254, 0.5),
-    0 0 15px rgba(0, 242, 254, 0.4);
-    
-  transition: all 0.2s ease;
-}
+      .item-1 .icon-box-3d {
+        background: var(--color-1);
+      }
+      .item-2 .icon-box-3d {
+        background: var(--color-2);
+      }
+      .item-3 .icon-box-3d {
+        background: var(--color-3);
+      }
+      .item-4 .icon-box-3d {
+        background: var(--color-4);
+      }
+      .item-5 .icon-box-3d {
+        background: var(--color-5);
+      }
 
-.action-btn:hover {
-  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-  box-shadow: 
-    0 12px 30px rgba(79, 172, 254, 0.6),
-    0 0 20px rgba(0, 242, 254, 0.5);
-  transform: translateY(-2px);
-}
+      .link-left span {
+        font-size: 14px;
+        font-weight: 700;
+        color: #334155;
+      }
 
-.action-btn:active {
-  transform: translateY(1px) scale(0.99);
-}
-</style>
-</head>
+      .arrow-right {
+        width: 7px;
+        height: 7px;
+        border-right: 2.5px solid #94a3b8;
+        border-bottom: 2.5px solid #94a3b8;
+        transform: rotate(-45deg);
+      }
 
-<body>
+      /* --- HIỆU ỨNG NHẤN NÚT VẬT LÝ KHI HOVER/ACTIVE --- */
+      /* Khi rê chuột: Khối nhấc cao lên -> Bóng đổ giãn rộng ra và nhạt đi */
+      .link-item-card:hover {
+        transform: translateY(-4px) translateZ(10px);
+        box-shadow:
+          0 4px 4px rgba(0, 0, 0, 0.04),
+          0 16px 22px -4px rgba(0, 0, 0, 0.15),
+          0 28px 36px -8px rgba(0, 0, 0, 0.18);
+      }
 
-<div class="phone-container">
-  
-  <div class="profile-card">
-    
-    <div class="info-section">
-      <div class="avatar-wrapper">
-        <img src="avatar.png" class="avatar" alt="Avatar">
+      /* Khi click bấm vào: Khối thụt hẳn xuống sát sàn -> Bóng biến mất */
+      .link-item-card:active {
+        transform: translateY(2px) translateZ(0);
+        box-shadow:
+          0 1px 1px rgba(0, 0, 0, 0.05),
+          0 3px 6px rgba(0, 0, 0, 0.08);
+      }
+
+      /* --- PHẦN 4: KHỐI BOTTOM LIÊN HỆ --- */
+      .contact-container {
+        margin-top: auto;
+        text-align: center;
+      }
+
+      /* Nút bấm dốc 3D có thềm nhựa dày */
+      .action-btn {
+        width: 100%;
+        padding: 15px;
+        background: linear-gradient(
+          180deg,
+          #b3a5ff 0%,
+          var(--color-purple) 100%
+        );
+        border: none;
+        border-radius: 18px;
+        color: white;
+        font-size: 14px;
+        font-weight: 700;
+        cursor: pointer;
+        letter-spacing: 0.5px;
+        /* Phần thềm nhựa dày màu tối phía dưới */
+        border-bottom: 4px solid #7d66f0;
+        box-shadow:
+          0 10px 20px -4px rgba(156, 136, 255, 0.4),
+          0 4px 6px rgba(0, 0, 0, 0.05);
+        transition: all 0.1s ease;
+      }
+
+      .action-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 14px 25px -4px rgba(156, 136, 255, 0.5);
+      }
+
+      .action-btn:active {
+        transform: translateY(3px);
+        border-bottom-width: 1px; /* Thềm nhựa lún xuống sát sàn */
+        box-shadow: 0 4px 8px rgba(156, 136, 255, 0.3);
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="phone-container">
+      <div class="profile-card">
+        <div class="top-info">
+          <div class="info-section">
+            <div class="avatar-container">
+              <div class="avatar-inner">
+                <img src="avatar.png" class="avatar" alt="Avatar" />
+              </div>
+            </div>
+            <div class="name">ĐẶNG TUẤN VINH</div>
+
+            <div class="color-dots">
+              <div class="dot" style="background: var(--color-1)"></div>
+              <div class="dot" style="background: var(--color-2)"></div>
+              <div class="dot" style="background: var(--color-3)"></div>
+              <div class="dot" style="background: var(--color-4)"></div>
+              <div class="dot" style="background: var(--color-5)"></div>
+            </div>
+          </div>
+
+          <div class="qr-zone">
+            <img src="qr.png" alt="QR chuyển khoản" />
+          </div>
+        </div>
+
+        <div class="company-block">
+          <div class="company-card item-1">
+            <div class="company-name">
+              <i class="fa-solid fa-briefcase" style="margin-right: 8px"></i
+              >CÔNG TY TNHH MTV MAY MẠNH CƯỜNG
+            </div>
+            <div class="company-detail">
+              Website / Fanpage:
+              <a
+                href="https://www.facebook.com/maymanhcuong/?locale=vi_VN"
+                target="_blank"
+                class="company-web-link"
+              >
+                https://www.facebook.com/maymanhcuong
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="links-list">
+          <a href="tel:0569440440" class="link-item-card item-1">
+            <div class="card-inner-content">
+              <div class="link-left">
+                <div class="icon-box-3d"><i class="fa-solid fa-phone"></i></div>
+                <span>0569 440 440</span>
+              </div>
+              <div class="arrow-right"></div>
+            </div>
+          </a>
+
+          <a href="mailto:dangtuanvinh@gmail.com" class="link-item-card item-2">
+            <div class="card-inner-content">
+              <div class="link-left">
+                <div class="icon-box-3d">
+                  <i class="fa-solid fa-envelope"></i>
+                </div>
+                <span>dangtuanvinh@gmail.com</span>
+              </div>
+              <div class="arrow-right"></div>
+            </div>
+          </a>
+
+          <a
+            href="https://www.facebook.com/dang.vinh.927"
+            target="_blank"
+            class="link-item-card item-3"
+          >
+            <div class="card-inner-content">
+              <div class="link-left">
+                <div class="icon-box-3d">
+                  <i class="fa-brands fa-facebook"></i>
+                </div>
+                <span>Facebook</span>
+              </div>
+              <div class="arrow-right"></div>
+            </div>
+          </a>
+
+          <a
+            href="https://zalo.me/0904862234"
+            target="_blank"
+            class="link-item-card item-4"
+          >
+            <div class="card-inner-content">
+              <div class="link-left">
+                <div class="icon-box-3d">
+                  <i class="fa-solid fa-comment"></i>
+                </div>
+                <span>Zalo</span>
+              </div>
+              <div class="arrow-right"></div>
+            </div>
+          </a>
+
+          <a
+            href="https://www.google.com/maps/@20.6439345,106.5304281,94m/data=!3m1!1e3?entry=ttu"
+            target="_blank"
+            class="link-item-card item-5"
+          >
+            <div class="card-inner-content">
+              <div class="link-left">
+                <div class="icon-box-3d">
+                  <i class="fa-solid fa-location-dot"></i>
+                </div>
+                <span>Nguyễn Bỉnh Khiêm, Hải Phòng</span>
+              </div>
+              <div class="arrow-right"></div>
+            </div>
+          </a>
+        </div>
+
+        <div class="contact-container">
+          <button
+            class="action-btn"
+            onclick="window.location.href = 'tel:0569440440'"
+          >
+            <i class="fa-solid fa-address-book" style="margin-right: 6px"></i>
+            LIÊN HỆ NGAY
+          </button>
+        </div>
       </div>
-      <div class="name">ĐẶNG TUẤN VINH</div>
     </div>
-
-    <div class="links-list">
-
-      <a href="tel:0569440440" class="link-item">
-        <div class="link-content-left">
-          <i class="fa-solid fa-phone"></i>
-          <span>0569 440 440</span>
-        </div>
-        <div class="arrow-right"></div>
-      </a>
-
-      <a href="mailto:dangtuanvinh@gmail.com" class="link-item">
-        <div class="link-content-left">
-          <i class="fa-solid fa-envelope"></i>
-          <span>dangtuanvinh@gmail.com</span>
-        </div>
-        <div class="arrow-right"></div>
-      </a>
-
-      <a href="https://www.facebook.com/dang.vinh.927" target="_blank" class="link-item">
-        <div class="link-content-left">
-          <i class="fa-brands fa-facebook"></i>
-          <span>Facebook</span>
-        </div>
-        <div class="arrow-right"></div>
-      </a>
-
-      <a href="https://zalo.me/0904862234" target="_blank" class="link-item">
-        <div class="link-content-left">
-          <i class="fa-solid fa-comment"></i>
-          <span>Zalo</span>
-        </div>
-        <div class="arrow-right"></div>
-      </a>
-
-      <a href="https://www.google.com/maps/@20.6439345,106.5304281,94m/data=!3m1!1e3?entry=ttu&g_ep=EgoyMDI2MDQyOS4wIKXMDSoASAFQAw%3D%3D" target="_blank" class="link-item">
-        <div class="link-content-left">
-          <i class="fa-solid fa-location-dot"></i>
-          <span>Nguyễn Bỉnh Khiêm, Hải Phòng</span>
-        </div>
-        <div class="arrow-right"></div>
-      </a>
-
-    </div>
-
-    <div class="qr-container">
-      <div class="qr-box">
-        <img src="qr.png" alt="QR chuyển khoản">
-      </div>
-      <button class="action-btn" onclick="window.location.href='tel:0569440440'">Liên Hệ Ngay</button>
-    </div>
-
-  </div>
-</div>
-
-</body>
+  </body>
 </html>
