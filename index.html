@@ -20,8 +20,7 @@
       }
 
       body {
-        /* Dùng màu nền hơi tối lại một chút để các khối đổ bóng đen nhìn rõ mồn một */
-        background: #e2e8f0;
+        background: #eef2f7;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -29,29 +28,46 @@
         padding: 20px;
       }
 
-      /* Bảng màu chuẩn từ image_f60419.png */
       :root {
-        --color-1: #ff9f43; /* Cam */
-        --color-2: #10ac84; /* Xanh lá */
-        --color-3: #2e86de; /* Xanh dương */
-        --color-4: #0abde3; /* Xanh cyan */
-        --color-5: #ee5253; /* Hồng/Đỏ */
-        --color-purple: #9c88ff; /* Tím */
+        --text-main: #1e293b;
+        --text-sub: #64748b;
+
+        /* Màu nền đổ bóng chuẩn Neumorphism mượt */
+        --bg-color: #eef2f7;
+        --shadow-dark: #d1d9e6;
+        --shadow-light: #ffffff;
+
+        /* Màu loang lỏng khi Hover nhẹ */
+        --liquid-blue: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 100%);
+        --liquid-green: linear-gradient(135deg, #dcfce7 0%, #bbf7d0 100%);
+        --liquid-red: linear-gradient(135deg, #ffe4e6 0%, #fecdd3 100%);
+        --liquid-orange: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+        --liquid-purple: linear-gradient(135deg, #f3e8ff 0%, #e9d5ff 100%);
+
+        --icon-blue: #0284c7;
+        --icon-green: #16a34a;
+        --icon-red: #dc2626;
+        --icon-orange: #ea580c;
+        --icon-purple: #9333ea;
+
+        /* CHÌA KHÓA SMOOTH: Đường cong Bezier giả lập độ đàn hồi vật lý */
+        --smooth-elastic: cubic-bezier(0.34, 1.56, 0.64, 1);
+        --smooth-click: cubic-bezier(0.4, 0, 0.2, 1);
       }
 
-      /* Khung mô phỏng điện thoại */
+      /* Khung điện thoại nổi lồi dẻo */
       .phone-container {
         width: 365px;
         height: 780px;
-        background: #f1f5f9; /* Nền trong máy xám nhạt để tương phản với khối trắng */
-        border-radius: 40px;
-        /* Đổ bóng cực mạnh cho toàn bộ chiếc điện thoại */
-        box-shadow:
-          0 40px 80px -20px rgba(0, 0, 0, 0.25),
-          inset 0 2px 5px rgba(255, 255, 255, 1);
+        background: var(--bg-color);
+        border-radius: 44px;
         padding: 30px 22px;
         display: flex;
         flex-direction: column;
+        border: 1px solid rgba(255, 255, 255, 0.6);
+        box-shadow:
+          12px 12px 24px var(--shadow-dark),
+          -12px -12px 24px var(--shadow-light);
       }
 
       .profile-card {
@@ -60,46 +76,37 @@
         height: 100%;
       }
 
-      /* --- PHẦN 1: PROFILE VÀ QR CHUYỂN LÊN ĐẦU --- */
+      /* --- PROFILE VÀ QR --- */
       .top-info {
         display: flex;
         justify-content: space-between;
-        align-items: flex-start;
+        align-items: center;
         margin-bottom: 25px;
-        position: relative;
       }
 
-      /* Avatar bên góc trái */
       .info-section {
         display: flex;
         flex-direction: column;
         align-items: flex-start;
-        flex: 1;
-        padding-right: 15px;
       }
 
       .avatar-container {
-        position: relative;
-        width: 100px;
-        height: 100px;
-        background: #ffffff;
-        border-radius: 28px;
+        width: 80px;
+        height: 80px;
+        background: var(--bg-color);
+        border-radius: 26px;
         padding: 6px;
-        margin-bottom: 10px;
-        border: 1px solid rgba(0, 0, 0, 0.05);
-        /* Kỹ thuật đổ bóng đa lớp tích tụ: Bóng càng gần càng đậm, bóng ra xa mờ dần */
+        margin-bottom: 12px;
         box-shadow:
-          0 4px 6px -1px rgba(156, 136, 255, 0.2),
-          0 12px 24px -4px rgba(156, 136, 255, 0.35),
-          0 20px 40px -10px rgba(156, 136, 255, 0.2);
+          4px 4px 8px var(--shadow-dark),
+          -4px -4px 8px var(--shadow-light);
       }
 
       .avatar-inner {
         width: 100%;
         height: 100%;
-        border-radius: 22px;
+        border-radius: 20px;
         overflow: hidden;
-        border: 2px solid var(--color-purple);
       }
 
       .avatar {
@@ -109,37 +116,24 @@
       }
 
       .name {
-        font-size: 19px;
+        font-size: 18px;
         font-weight: 800;
-        color: #1e293b;
-        letter-spacing: 0.5px;
-        margin-top: 5px;
+        color: var(--text-main);
+        letter-spacing: 0.3px;
       }
 
-      .color-dots {
-        display: flex;
-        gap: 6px;
-        margin-top: 10px;
-      }
-      .dot {
-        width: 6px;
-        height: 6px;
-        border-radius: 50%;
-      }
-
-      /* Khối QR lên cạnh avatar */
       .qr-zone {
-        width: 125px;
-        height: 125px;
-        background: #ffffff;
-        border-radius: 20px;
+        width: 105px;
+        height: 105px;
+        background: var(--bg-color);
+        border-radius: 22px;
         padding: 10px;
-        border: 1px solid rgba(0, 0, 0, 0.05);
         display: flex;
         justify-content: center;
         align-items: center;
-        margin-top: 0;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+        box-shadow:
+          6px 6px 12px var(--shadow-dark),
+          -6px -6px 12px var(--shadow-light);
       }
 
       .qr-zone img {
@@ -148,89 +142,70 @@
         border-radius: 12px;
       }
 
-      /* --- PHẦN 2: THÔNG TIN CÔNG TY MỚI --- */
+      /* --- KHỐI THÔNG TIN CÔNG TY (LÚN) --- */
       .company-block {
-        display: flex;
-        flex-direction: column;
-        gap: 15px;
-        margin-bottom: 25px;
+        margin-bottom: 22px;
       }
 
       .company-card {
-        background: #ffffff;
-        border-radius: 16px;
-        padding: 15px 18px;
+        background: var(--bg-color);
+        border-radius: 20px;
+        padding: 16px;
         box-shadow:
-          0 2px 2px rgba(0, 0, 0, 0.05),
-          0 6px 10px rgba(0, 0, 0, 0.08);
+          inset 3px 3px 6px var(--shadow-dark),
+          inset -3px -3px 6px var(--shadow-light);
       }
 
       .company-name {
-        font-size: 14px;
+        font-size: 13px;
         font-weight: 700;
-        color: var(--color-purple);
-        margin-bottom: 5px;
+        color: var(--text-main);
+        margin-bottom: 6px;
+        display: flex;
+        align-items: center;
       }
 
       .company-detail {
         font-size: 12px;
-        color: #64748b;
-        line-height: 1.4;
+        color: var(--text-sub);
+        line-height: 1.5;
       }
 
       .company-web-link {
-        color: var(--color-3);
+        color: #0284c7;
         text-decoration: none;
-        word-break: break-all;
-      }
-      .company-web-link:hover {
-        text-decoration: underline;
+        font-weight: 600;
       }
 
-      /* --- PHẦN 3: DANH SÁCH KHỐI LIÊN KẾT NỔI 3D + BÓNG ĐỔ ĐA TẦNG ĐẬM --- */
+      /* --- DANH SÁCH NÚT NỔI KHỐI SIÊU MƯỢT --- */
       .links-list {
         display: flex;
         flex-direction: column;
-        gap: 18px; /* Giãn rộng để bóng đổ không đè lên nhau */
+        gap: 16px;
         margin-bottom: 20px;
-        /* Bật chế độ môi trường không gian 3D */
-        perspective: 1000px;
       }
 
       .link-item-card {
         position: relative;
         display: block;
         text-decoration: none;
-        background: #ffffff;
-        border-radius: 16px;
-        height: 52px;
-        transition: all 0.2s cubic-bezier(0.25, 0.8, 0.25, 1);
+        background: var(--bg-color);
+        border-radius: 20px;
+        height: 56px;
 
-        /* ĐỔ BÓNG KHỐI 3D ĐẬM ĐẶC (LAYERED AMBIENT OCCLUSION) */
+        /* Trạng thái tĩnh: Bóng nổi khối rõ ràng */
         box-shadow:
-          0 2px 2px rgba(0, 0, 0, 0.05),
-          /* Bóng sát chân khối */ 0 8px 12px -2px rgba(0, 0, 0, 0.1),
-          /* Bóng thân khối đổ xuống */ 0 16px 20px -6px rgba(0, 0, 0, 0.12); /* Vùng mù tối lan rộng phía dưới */
+          6px 6px 12px #cbd5e1,
+          -6px -6px 12px var(--shadow-light);
 
-        /* Tạo viền nhựa màu bọc quanh chân khối để tạo độ dày góc nhìn */
-        border-left: 30px solid transparent;
-      }
+        /* Ép trình duyệt tối ưu hóa phần cứng đồ họa (GPU) để chạy mượt hơn */
+        will-change: transform, box-shadow, background-color;
 
-      /* Đổ màu chân khối riêng biệt từng hàng */
-      .item-1 {
-        border-left-color: var(--color-1);
-      }
-      .item-2 {
-        border-left-color: var(--color-2);
-      }
-      .item-3 {
-        border-left-color: var(--color-3);
-      }
-      .item-4 {
-        border-left-color: var(--color-4);
-      }
-      .item-5 {
-        border-left-color: var(--color-5);
+        /* Thiết lập chuyển động mượt mà đàn hồi cho tất cả thuộc tính */
+        transition:
+          transform 0.4s var(--smooth-elastic),
+          box-shadow 0.4s var(--smooth-elastic),
+          background-color 0.4s ease;
       }
 
       .card-inner-content {
@@ -239,119 +214,167 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
-        padding: 0 18px;
-        background: #ffffff;
-        border-radius: 0 14px 14px 0;
-        /* Tạo vết lõm nhẹ bên trong lòng khối */
-        box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.02);
+        padding: 0 20px;
       }
 
       .link-left {
         display: flex;
         align-items: center;
         gap: 14px;
+        color: var(--text-main);
       }
 
-      /* Khối vuông chứa icon dạng nút nhấn 3D thu nhỏ */
-      .icon-box-3d {
-        width: 30px;
-        height: 30px;
-        border-radius: 8px;
+      /* Icon chìm lún nhẹ */
+      .icon-box-liquid {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
         display: flex;
         justify-content: center;
         align-items: center;
-        color: #ffffff;
-        font-size: 12px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-      }
-
-      .item-1 .icon-box-3d {
-        background: var(--color-1);
-      }
-      .item-2 .icon-box-3d {
-        background: var(--color-2);
-      }
-      .item-3 .icon-box-3d {
-        background: var(--color-3);
-      }
-      .item-4 .icon-box-3d {
-        background: var(--color-4);
-      }
-      .item-5 .icon-box-3d {
-        background: var(--color-5);
+        background: var(--bg-color);
+        color: var(--text-sub);
+        font-size: 13px;
+        box-shadow:
+          inset 2px 2px 4px var(--shadow-dark),
+          inset -2px -2px 4px var(--shadow-light);
+        transition: color 0.3s ease;
       }
 
       .link-left span {
         font-size: 14px;
         font-weight: 700;
-        color: #334155;
       }
 
       .arrow-right {
-        width: 7px;
-        height: 7px;
-        border-right: 2.5px solid #94a3b8;
-        border-bottom: 2.5px solid #94a3b8;
+        width: 6px;
+        height: 6px;
+        border-right: 2.5px solid var(--text-sub);
+        border-bottom: 2.5px solid var(--text-sub);
         transform: rotate(-45deg);
+        opacity: 0.6;
+        transition:
+          transform 0.3s var(--smooth-elastic),
+          opacity 0.3s ease;
       }
 
-      /* --- HIỆU ỨNG NHẤN NÚT VẬT LÝ KHI HOVER/ACTIVE --- */
-      /* Khi rê chuột: Khối nhấc cao lên -> Bóng đổ giãn rộng ra và nhạt đi */
+      /* --- HIỆU ỨNG HOVER: LÚN XUỐNG MƯỢT MÀ --- */
+
       .link-item-card:hover {
-        transform: translateY(-4px) translateZ(10px);
-        box-shadow:
-          0 4px 4px rgba(0, 0, 0, 0.04),
-          0 16px 22px -4px rgba(0, 0, 0, 0.15),
-          0 28px 36px -8px rgba(0, 0, 0, 0.18);
+        /* Khi di chuột vào: Nút lún nhẹ đều xuống sàn tạo phản hồi 2D */
+        transform: translateY(2px);
       }
 
-      /* Khi click bấm vào: Khối thụt hẳn xuống sát sàn -> Bóng biến mất */
+      .item-blue:hover {
+        background: var(--liquid-blue);
+        box-shadow:
+          inset 4px 4px 8px #cbd5e1,
+          inset -4px -4px 8px var(--shadow-light);
+      }
+      .item-blue:hover .icon-box-liquid {
+        color: var(--icon-blue);
+      }
+
+      .item-green:hover {
+        background: var(--liquid-green);
+        box-shadow:
+          inset 4px 4px 8px #cbd5e1,
+          inset -4px -4px 8px var(--shadow-light);
+      }
+      .item-green:hover .icon-box-liquid {
+        color: var(--icon-green);
+      }
+
+      .item-red:hover {
+        background: var(--liquid-red);
+        box-shadow:
+          inset 4px 4px 8px #cbd5e1,
+          inset -4px -4px 8px var(--shadow-light);
+      }
+      .item-red:hover .icon-box-liquid {
+        color: var(--icon-red);
+      }
+
+      .item-orange:hover {
+        background: var(--liquid-orange);
+        box-shadow:
+          inset 4px 4px 8px #cbd5e1,
+          inset -4px -4px 8px var(--shadow-light);
+      }
+      .item-orange:hover .icon-box-liquid {
+        color: var(--icon-orange);
+      }
+
+      .item-purple:hover {
+        background: var(--liquid-purple);
+        box-shadow:
+          inset 4px 4px 8px #cbd5e1,
+          inset -4px -4px 8px var(--shadow-light);
+      }
+      .item-purple:hover .icon-box-liquid {
+        color: var(--icon-purple);
+      }
+
+      .link-item-card:hover .arrow-right {
+        opacity: 1;
+        transform: translateX(3px) rotate(-45deg);
+      }
+
+      /* --- HIỆU ỨNG CLICK (ACTIVE): ÉP CHẶT HOÀN TOÀN --- */
       .link-item-card:active {
-        transform: translateY(2px) translateZ(0);
+        /* Chuyển sang hiệu ứng click nhanh, gãy gọn để có cảm giác bấm nút thật */
+        transition:
+          transform 0.1s var(--smooth-click),
+          box-shadow 0.1s var(--smooth-click);
+        transform: translateY(4px) scale(0.98);
         box-shadow:
-          0 1px 1px rgba(0, 0, 0, 0.05),
-          0 3px 6px rgba(0, 0, 0, 0.08);
+          inset 6px 6px 12px #cbd5e1,
+          inset -6px -6px 12px var(--shadow-light);
       }
 
-      /* --- PHẦN 4: KHỐI BOTTOM LIÊN HỆ --- */
+      /* --- NÚT ACTION LIÊN HỆ DƯỚI ĐÁY --- */
       .contact-container {
         margin-top: auto;
-        text-align: center;
       }
 
-      /* Nút bấm dốc 3D có thềm nhựa dày */
       .action-btn {
         width: 100%;
-        padding: 15px;
-        background: linear-gradient(
-          180deg,
-          #b3a5ff 0%,
-          var(--color-purple) 100%
-        );
+        padding: 16px;
+        background: var(--bg-color);
         border: none;
-        border-radius: 18px;
-        color: white;
+        border-radius: 22px;
+        color: var(--icon-purple);
         font-size: 14px;
-        font-weight: 700;
-        cursor: pointer;
+        font-weight: 800;
         letter-spacing: 0.5px;
-        /* Phần thềm nhựa dày màu tối phía dưới */
-        border-bottom: 4px solid #7d66f0;
+        cursor: pointer;
+        will-change: transform, box-shadow;
+        transition:
+          transform 0.4s var(--smooth-elastic),
+          box-shadow 0.4s var(--smooth-elastic),
+          background-color 0.4s ease;
+
         box-shadow:
-          0 10px 20px -4px rgba(156, 136, 255, 0.4),
-          0 4px 6px rgba(0, 0, 0, 0.05);
-        transition: all 0.1s ease;
+          6px 6px 12px #cbd5e1,
+          -6px -6px 12px var(--shadow-light);
       }
 
       .action-btn:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 14px 25px -4px rgba(156, 136, 255, 0.5);
+        transform: translateY(2px);
+        background: var(--liquid-purple);
+        box-shadow:
+          inset 4px 4px 8px #cbd5e1,
+          inset -4px -4px 8px var(--shadow-light);
       }
 
       .action-btn:active {
-        transform: translateY(3px);
-        border-bottom-width: 1px; /* Thềm nhựa lún xuống sát sàn */
-        box-shadow: 0 4px 8px rgba(156, 136, 255, 0.3);
+        transition:
+          transform 0.1s var(--smooth-click),
+          box-shadow 0.1s var(--smooth-click);
+        transform: translateY(4px) scale(0.97);
+        box-shadow:
+          inset 6px 6px 12px #cbd5e1,
+          inset -6px -6px 12px var(--shadow-light);
       }
     </style>
   </head>
@@ -359,6 +382,7 @@
   <body>
     <div class="phone-container">
       <div class="profile-card">
+        <!-- Khối Profile -->
         <div class="top-info">
           <div class="info-section">
             <div class="avatar-container">
@@ -367,45 +391,49 @@
               </div>
             </div>
             <div class="name">ĐẶNG TUẤN VINH</div>
-
-            <div class="color-dots">
-              <div class="dot" style="background: var(--color-1)"></div>
-              <div class="dot" style="background: var(--color-2)"></div>
-              <div class="dot" style="background: var(--color-3)"></div>
-              <div class="dot" style="background: var(--color-4)"></div>
-              <div class="dot" style="background: var(--color-5)"></div>
-            </div>
           </div>
 
+          <!-- Khối QR -->
           <div class="qr-zone">
             <img src="qr.png" alt="QR chuyển khoản" />
           </div>
         </div>
 
+        <!-- Khối doanh nghiệp lún -->
         <div class="company-block">
-          <div class="company-card item-1">
+          <div class="company-card">
             <div class="company-name">
-              <i class="fa-solid fa-briefcase" style="margin-right: 8px"></i
+              <i
+                class="fa-solid fa-briefcase"
+                style="margin-right: 8px; color: var(--icon-blue)"
+              ></i
               >CÔNG TY TNHH MTV MAY MẠNH CƯỜNG
             </div>
+            <div class="company-detail"></div>
           </div>
         </div>
 
+        <!-- Danh sách liên kết nổi dẻo mượt mà -->
         <div class="links-list">
-          <a href="tel:0569440440" class="link-item-card item-1">
+          <a href="tel:0569440440" class="link-item-card item-blue">
             <div class="card-inner-content">
               <div class="link-left">
-                <div class="icon-box-3d"><i class="fa-solid fa-phone"></i></div>
+                <div class="icon-box-liquid">
+                  <i class="fa-solid fa-phone"></i>
+                </div>
                 <span>0569 440 440</span>
               </div>
               <div class="arrow-right"></div>
             </div>
           </a>
 
-          <a href="mailto:dangtuanvinh@gmail.com" class="link-item-card item-2">
+          <a
+            href="mailto:dangtuanvinh@gmail.com"
+            class="link-item-card item-green"
+          >
             <div class="card-inner-content">
               <div class="link-left">
-                <div class="icon-box-3d">
+                <div class="icon-box-liquid">
                   <i class="fa-solid fa-envelope"></i>
                 </div>
                 <span>dangtuanvinh@gmail.com</span>
@@ -417,11 +445,11 @@
           <a
             href="https://www.facebook.com/dang.vinh.927"
             target="_blank"
-            class="link-item-card item-3"
+            class="link-item-card item-red"
           >
             <div class="card-inner-content">
               <div class="link-left">
-                <div class="icon-box-3d">
+                <div class="icon-box-liquid">
                   <i class="fa-brands fa-facebook"></i>
                 </div>
                 <span>Facebook</span>
@@ -433,11 +461,11 @@
           <a
             href="https://zalo.me/0904862234"
             target="_blank"
-            class="link-item-card item-4"
+            class="link-item-card item-orange"
           >
             <div class="card-inner-content">
               <div class="link-left">
-                <div class="icon-box-3d">
+                <div class="icon-box-liquid">
                   <i class="fa-solid fa-comment"></i>
                 </div>
                 <span>Zalo</span>
@@ -449,11 +477,11 @@
           <a
             href="https://www.google.com/maps/@20.6439345,106.5304281,94m/data=!3m1!1e3?entry=ttu"
             target="_blank"
-            class="link-item-card item-5"
+            class="link-item-card item-purple"
           >
             <div class="card-inner-content">
               <div class="link-left">
-                <div class="icon-box-3d">
+                <div class="icon-box-liquid">
                   <i class="fa-solid fa-location-dot"></i>
                 </div>
                 <span>Nguyễn Bỉnh Khiêm, Hải Phòng</span>
@@ -463,6 +491,7 @@
           </a>
         </div>
 
+        <!-- Nút hành động đáy -->
         <div class="contact-container">
           <button
             class="action-btn"
